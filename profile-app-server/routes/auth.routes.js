@@ -3,6 +3,7 @@ const router = express.Router();
 const User = require('../models/User.model');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const isAuthenticated = require('../config/isAuthenticated');
 
 // ! everything is prefixed with /auth //
 
@@ -70,6 +71,9 @@ router.post('/login', async (req, res, next) => {
   }
 });
 
-router.get('/verify');
+// route used to verify the user's authentication status and retrieves their user object for further processing
+router.get('/verify', isAuthenticated, (req, res) => {
+  res.json(req.user);
+});
 
 module.exports = router;
