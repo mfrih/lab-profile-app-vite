@@ -6,13 +6,13 @@ const User = require('../models/User.model');
 async function isAuthenticated(req, res, next) {
   try {
     // checks if there is an Authorisation header
-    const authHeaders = req.headers.authorization;
-    if (!authHeaders) {
+    const authHeader = req.headers.authorization;
+    if (!authHeader) {
       return res.status(401).json({ error: 'No token provided' });
     }
 
     //extracts the JWT token by removing the Bearer prefix
-    const token = authHeaders.replace('Bearer ', '');
+    const token = authHeader.replace('Bearer ', '');
 
     // verifies the JWT token, if the token is valid, it returns the payload
     const payload = jwt.verify(token, TOKEN_SECRET, { algorithms: ['HS256'] });
