@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../context/auth.context';
 const API_URL = 'http://localhost:5005';
 
 const LoginPage = () => {
@@ -8,7 +9,7 @@ const LoginPage = () => {
     username: '',
     password: '',
   });
-
+  const { authenticateUser } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -21,8 +22,10 @@ const LoginPage = () => {
     e.preventDefault();
     try {
       const response = await axios.post(`${API_URL}/auth/login`, formState);
-      const authToken = response.data.authToken;
-      localStorage.setItem('authToken', authToken);
+      // est-ce qu'il y a encore besoin des deux lignes après ?
+      // const authToken = response.data.authToken;
+      // localStorage.setItem('authToken', authToken);
+      await authenticateUser();
       navigate('/');
     } catch (error) {
       console.error('Error logging in', error);

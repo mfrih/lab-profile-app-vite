@@ -21,7 +21,7 @@ const AuthProviderWrapper = ({ children }) => {
   //function that authenticates user based on token
   const authenticateUser = () => {
     // get the stored token from the localStorage
-    const storedToken = localeStorage.getItem('authToken');
+    const storedToken = localStorage.getItem('authToken');
     // if there is a token in the localStorage
     if (storedToken) {
       // verify the token with the server
