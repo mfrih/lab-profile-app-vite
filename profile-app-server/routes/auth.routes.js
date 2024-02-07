@@ -47,8 +47,8 @@ router.post('/login', async (req, res, next) => {
         .json({ message: 'All these fields are mandatory for login' });
     }
     //find the user by their username
-    const currentUser = await User.findOne(
-      { username }.select('username password')
+    const currentUser = await User.findOne({ username }).select(
+      'username password'
     );
     if (!currentUser) {
       return res.status(400).json({ message: 'This user does not exist' });

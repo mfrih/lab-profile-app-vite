@@ -15,7 +15,9 @@ async function isAuthenticated(req, res, next) {
     const token = authHeader.replace('Bearer ', '');
 
     // verifies the JWT token, if the token is valid, it returns the payload
-    const payload = jwt.verify(token, TOKEN_SECRET, { algorithms: ['HS256'] });
+    const payload = jwt.verify(token, process.env.TOKEN_SECRET, {
+      algorithms: ['HS256'],
+    });
 
     // find the corresponding user in the DB
     const user = await User.findById(payload._id);
