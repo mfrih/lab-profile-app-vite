@@ -85,4 +85,4 @@ const AuthProviderWrapper = ({ children }) => {
   );
 };
 
-export { AuthProviderWrapper, AuthContext };
+export default AuthProviderWrapper;
