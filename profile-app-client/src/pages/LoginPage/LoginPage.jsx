@@ -22,9 +22,8 @@ const LoginPage = () => {
     e.preventDefault();
     try {
       const response = await axios.post(`${API_URL}/auth/login`, formState);
-      // est-ce qu'il y a encore besoin des deux lignes après ?
-      // const authToken = response.data.authToken;
-      // localStorage.setItem('authToken', authToken);
+      const authToken = response.data.authToken;
+      localStorage.setItem('authToken', authToken);
       await authenticateUser();
       navigate('/');
     } catch (error) {
